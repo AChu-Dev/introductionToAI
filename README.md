@@ -28,3 +28,8 @@ How to solve: Eleminate numbers by looking at Rows and do not guess
 - PyGame as GUI
 - Recursion algorithm
 - making program generate layouts
+
+
+- Ideas for later:
+- Read & Solve layouts
+- Save layouts
