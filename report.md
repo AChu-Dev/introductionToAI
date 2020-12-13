@@ -1,3 +1,10 @@
+# Assessment requirements for A1/A2
+- Introduction, Statement of the problem, Aims and Objectives 33% (Evidence of Independence of thought, ability to build upon experience, supported by high quality literacture)
+- Prototype Developement & AI Algorithms 33% (Consistent high-level competence in all practical, technical and creative aspects of the project, Exceptoonal demonstraction taht proves the artefact goes far beyond expectation, attention to industry standards)
+- Presnetation of work and Communication 33% (Exceptional presentation and organisation of work and fluent communication ia all contexts)
+
+
+
 ## Rules for Sudoku
 
 Reference: https://sudoku.com/how-to-play/sudoku-rules-for-complete-beginners/
