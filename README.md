@@ -21,10 +21,10 @@ How to solve: Eleminate numbers by looking at Rows and do not guess
 
 - Backtracking/CSP algorithm
 - TkInter as GUI
-
+- feeding AI with data
 
 ### Idea 2:
 
 - PyGame as GUI
 - Recursion algorithm
-
+- making program generate layouts
