@@ -1,7 +1,7 @@
 import tensorflow as tf
 import time
 
-print('TensorFlow version: ',tf.__version__)
+print('TensorFlow version: ', tf.__version__)
 
 start_time = time.time()
 

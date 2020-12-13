@@ -15,5 +15,16 @@ Rules: Use numbers from 1 to 9, Do not repeat numbers
 
 How to solve: Eleminate numbers by looking at Rows and do not guess
 
+##Solution Ideas:
 
+### Idea 1:
+
+- Backtracking/CSP algorithm
+- TkInter as GUI
+
+
+### Idea 2:
+
+- PyGame as GUI
+- Recursion algorithm
 
