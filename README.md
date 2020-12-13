@@ -15,7 +15,7 @@ Rules: Use numbers from 1 to 9, Do not repeat numbers
 
 How to solve: Eleminate numbers by looking at Rows and do not guess
 
-##Solution Ideas:
+## Solution Ideas:
 
 ### Idea 1:
 
