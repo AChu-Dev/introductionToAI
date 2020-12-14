@@ -60,6 +60,34 @@ class InterfaceGUI:
         frame8 = ttk.Frame(window)
         frame8.config(height=180, width=180)
         frame8.place(x=383, y=383)
+        # Text Boxies
+        field00 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
+        field00.place(x=0, y=0, height=60, width=60)
+
+        field01 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
+        field01.place(x=61, y=0, height=60, width=60)
+
+        field02 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
+        field02.place(x=122, y=0, height=60, width=60)
+
+        field10 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
+        field10.place(x=0, y=61, height=60, width=60)
+
+        field11 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
+        field11.place(x=61, y=61, height=60, width=60)
+
+        field12 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
+        field12.place(x=122, y=61, height=60, width=60)
+
+        field20 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
+        field20.place(x=0, y=122, height=60, width=60)
+
+        field21 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
+        field21.place(x=61, y=122, height=60, width=60)
+
+        field22 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
+        field22.place(x=122, y=122, height=60, width=60)
+        field22.config(state="DISABLED")
 
     def loadData(self, array):
         pass
@@ -69,4 +97,5 @@ class InterfaceGUI:
         pass
 
 
-
+if __name__ == '__main__': # for testing purposes it will stay here
+    main()

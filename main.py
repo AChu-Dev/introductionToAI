@@ -25,8 +25,7 @@ class mainAi:
                 if y == 0:
                     x = input('Insert data for x: ', x, 'y:', y)
 
-
-    def insertChecker(self, array):
+    def dataChecker(self, array):
         try:
             leftPointer = 0
             levelPointer = 0
@@ -42,5 +41,6 @@ class mainAi:
 
 if __name__ == '__main__':
     startTime = time.time()
-    print(f"{(time.time() - startTime)} Compilation Time")
     # gui.main()
+
+    print(f"{(time.time() - startTime)} Compilation Time")
