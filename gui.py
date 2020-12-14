@@ -87,7 +87,12 @@ class InterfaceGUI:
 
         field22 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
         field22.place(x=122, y=122, height=60, width=60)
-        field22.config(state="DISABLED")
+
+        buttonDisable = ttk.Button(frame7, text="Disable field22", command=lambda: field22.config(state=DISABLED))
+        buttonDisable.place(height=20, width= 100)
+
+        buttonEnable = ttk.Button(frame7, text="Disable field22", command=lambda: field22.config(state=NORMAL))
+        buttonEnable.place(x=0, y=40, height=20, width=100)
 
     def loadData(self, array):
         pass
