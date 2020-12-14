@@ -15,12 +15,12 @@ class GUI:
         window.title('Sudoku AI')
 
         # Set Menu Bar
-        menu_bar = Menu(window)
-        window.config(menu = menu_bar)
+        menuBar = Menu(window)
+        window.config(menu = menuBar)
 
-        program = Menu(menu_bar)
+        program = Menu(menuBar)
 
-        menu_bar.add_cascade(menu=program, label='Program')
+        menuBar.add_cascade(menu=program, label='Program')
 
         program.add_command(label='Restart')
 
