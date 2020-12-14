@@ -3,10 +3,10 @@ from tkinter import ttk
 
 def main():
     root = Tk()
-    gui = GUI(root)
+    gui = InterfaceGUI(root)
     root.mainloop()
 
-class GUI:
+class InterfaceGUI:
     def __init__(self, window=None):
 
         # Master window variables
@@ -16,7 +16,7 @@ class GUI:
 
         # Set Menu Bar
         menuBar = Menu(window)
-        window.config(menu = menuBar)
+        window.config(menu=menuBar)
 
         program = Menu(menuBar)
 
@@ -24,7 +24,7 @@ class GUI:
 
         program.add_command(label='Restart')
 
-        # Frames
+        # Frames, 9x9 grid
         frame0 = ttk.Frame(window)
         frame0.config(height=180, width=180)
         frame0.place(x=5, y=5)
@@ -70,11 +70,3 @@ class GUI:
 
 
 
-
-
-
-
-
-
-
-if __name__ == "__main__": main()
