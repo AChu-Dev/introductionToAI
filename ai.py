@@ -9,13 +9,14 @@ aiData = input('Insert data ')
 #insertChecker(aiData)
 print(tf.reduce_sum(tf.random.normal([1000, 1000])))
 
-def findEmptySpace():
+def findEmptySpace(array): # time Complexity quite high, change it
     for x in aiData:
         for y in aiData:
             if y == 0:
-                input = ('Insert data for x: ', x, 'y:', y)
+                x = input = ('Insert data for x: ', x, 'y:', y)
 
-def insertChecker(values):
+
+def insertChecker(array):
     try:
         leftPointer = 0
         levelPointer = 0
@@ -23,10 +24,11 @@ def insertChecker(values):
             if leftPointer == 8:
                 leftPointer = 0
                 levelPointer += 1
-            if values[leftPointer][leftPointer] < 0 or values[leftPointer][leftPointer] > 9:
+            if array[leftPointer][leftPointer] < 0 or array[leftPointer][leftPointer] > 9:
                 return False
         return True
     except NameError:
         return NameError
 
 print(f"{(time.time() - startTime)} Compilation Time")
+

@@ -33,6 +33,13 @@ class GUI:
         frame1.config(height=180, width=180)
         frame1.place(x=187, y=3)
 
+    def loadData(self, array):
+        pass
+    def updateData(self, x, y, value):
+        pass
+    def restart(self):
+        pass
+    
 
 
 
