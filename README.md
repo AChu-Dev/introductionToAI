@@ -30,6 +30,6 @@ How to solve: Eleminate numbers by looking at Rows and do not guess
 - making program generate layouts
 
 
-- Ideas for later:
+### Ideas for later:
 - Read & Solve layouts
 - Save layouts
