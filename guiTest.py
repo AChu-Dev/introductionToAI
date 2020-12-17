@@ -27,13 +27,11 @@ class InterfaceGUI:
 
         program.add_command(label='Restart')
 
-        self.guiBuilder()
+        # self.guiBuilder()
 
 
         # Frames, 9x9 grid # 3 values there
-        frame_value0 = 5
-        frame_value1 = 194
-        frame_value2 = 383
+
 
         frame0 = ttk.Frame(window)
         frame0.config(height=180, width=180)
@@ -350,9 +348,21 @@ class InterfaceGUI:
         pass
     def guiBuilder(self):
         frames = []
+        fields = []
+
+        frame_value0 = 5
+        frame_value1 = 194
+        frame_value2 = 383
+
+        field_value0 = 0
+        field_value1 = 61
+        field_value2 = 122
+
+        for x in range(8):
+            frames.append("frames" + str(x))
         for x in range(3):
             for y in range(3):
-                frames.append("frame" + str(x) + str(y))
+                fields.append("frame" + str(x) + str(y))
 
 
 
