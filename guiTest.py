@@ -68,8 +68,12 @@ class InterfaceGUI:
         frame8 = ttk.Frame(window)
         frame8.config(height=180, width=180)
         frame8.place(x=383, y=383)
+<<<<<<< HEAD
+        # Text Boxes
+=======
 
         # Text Boxies
+>>>>>>> 922146128b213877cbb6bc461c6211deab12274f
         # frame0
 
         field000 = ttk.Entry(frame0, justify=CENTER, font=("Cambria", "32", "bold"))
@@ -375,3 +379,4 @@ class InterfaceGUI:
 
 if __name__ == '__main__': # for testing purposes it will stay here
     main()
+

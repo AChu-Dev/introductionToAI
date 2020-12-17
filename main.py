@@ -3,9 +3,11 @@ import gui
 import time
 import numpy as np
 import matplotlib.pyplot as plt
+from pyconstraints import Problem
 from sklearn import linear_model as lm
 
 print('TensorFlow version: ', tf.__version__)
+
 
 class mainAi:
     def __init__(self):
@@ -39,8 +41,28 @@ class mainAi:
         except NameError:
             return NameError
 
+    def fieldConstraintGrid(self, a, b, c, d, e, f, g, h, i):
+        try:
+            sudoku = Problem()
+            sudoku.addVariable('a', a)
+            sudoku.add_variable('b', b)
+            sudoku.add_variable('c', c)
+            sudoku.add_variable('d', d)
+            sudoku.add_variable('e', e)
+            sudoku.add_variable('f', f)
+            sudoku.add_variable('g', g)
+            sudoku.add_variable('h', h)
+            sudoku.add_variable('i', i)
+            sudoku.addConstraint()
+
+
+            return sudoku.iter_solutions().next();
+        except:
+            # fail_constraint()
+            print('Failed GridConstraint')
+
 if __name__ == '__main__':
     startTime = time.time()
-    # gui.main()
+    gui.main()
 
     print(f"{(time.time() - startTime)} Compilation Time")
