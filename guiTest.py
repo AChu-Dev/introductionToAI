@@ -6,6 +6,9 @@ def main():
     gui = InterfaceGUI(root)
     root.mainloop()
 
+
+
+
 class InterfaceGUI:
     def __init__(self, window=None):
 
@@ -24,7 +27,14 @@ class InterfaceGUI:
 
         program.add_command(label='Restart')
 
-        # Frames, 9x9 grid
+        self.guiBuilder()
+
+
+        # Frames, 9x9 grid # 3 values there
+        frame_value0 = 5
+        frame_value1 = 194
+        frame_value2 = 383
+
         frame0 = ttk.Frame(window)
         frame0.config(height=180, width=180)
         frame0.place(x=5, y=5)
@@ -60,8 +70,10 @@ class InterfaceGUI:
         frame8 = ttk.Frame(window)
         frame8.config(height=180, width=180)
         frame8.place(x=383, y=383)
+
         # Text Boxies
         # frame0
+
         field000 = ttk.Entry(frame0, justify=CENTER, font=("Cambria", "32", "bold"))
         field000.place(x=0, y=0, height=60, width=60)
 
@@ -150,7 +162,7 @@ class InterfaceGUI:
         field222 = ttk.Entry(frame2, justify=CENTER, font=("Cambria", "32", "bold"))
         field222.place(x=122, y=122, height=60, width=60)
 
-        #frame3
+        # frame3
 
         field300 = ttk.Entry(frame3, justify=CENTER, font=("Cambria", "32", "bold"))
         field300.place(x=0, y=0, height=60, width=60)
@@ -321,20 +333,27 @@ class InterfaceGUI:
         field821 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
         field821.place(x=61, y=122, height=60, width=60)
 
-        field822 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
+        field822 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))#, command=lambda: self.entryChecker(field822.getint()))
         field822.place(x=122, y=122, height=60, width=60)
-        # buttonDisable = ttk.Button(frame7, text="Disable field22", command=lambda: field22.config(state=DISABLED))
-        # buttonDisable.place(height=20, width= 100)
 
-        # buttonEnable = ttk.Button(frame7, text="Enable field22", command=lambda: field22.config(state=NORMAL))
-        # buttonEnable.place(x=0, y=40, height=20, width=100)
+    def entryChecker(self, input=0):
+        try:
+            print(input)
+        except:
+            pass
 
-    def loadData(self, array):
+    def loadData(self, data):
         pass
     def updateData(self, x, y, value):
         pass
     def restart(self):
         pass
+    def guiBuilder(self):
+        frames = []
+        for x in range(3):
+            for y in range(3):
+                frames.append("frame" + str(x) + str(y))
+
 
 
 if __name__ == '__main__': # for testing purposes it will stay here
