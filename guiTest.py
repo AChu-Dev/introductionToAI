@@ -27,7 +27,7 @@ class InterfaceGUI:
 
         program.add_command(label='Restart')
 
-        # self.guiBuilder()
+        # self.guiBuilder(window)
 
 
         # Frames, 9x9 grid # 3 values there
@@ -346,7 +346,7 @@ class InterfaceGUI:
         pass
     def restart(self):
         pass
-    def guiBuilder(self):
+    def guiBuilder(self, window):
         frames = []
         fields = []
 
@@ -364,7 +364,14 @@ class InterfaceGUI:
             for y in range(3):
                 fields.append("frame" + str(x) + str(y))
 
-
+        # frame0 = ttk.Frame(window)
+        # frame0.config(height=180, width=180)
+        # frame0.place(x=5, y=5)
+        for z in range(len(frames)):
+            frames[z] = ttk.Frame(window)
+            frames[z].config(height=180, width=180)
+            #if list(frames[z])[5]:
+            frames[z].place(x=frame_value0+z*10, y=frame_value0+z*10)
 
 if __name__ == '__main__': # for testing purposes it will stay here
     main()
