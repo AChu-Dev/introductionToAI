@@ -44,7 +44,7 @@ class mainAi:
     def fieldConstraintGrid(self, a, b, c, d, e, f, g, h, i):
         try:
             sudoku = Problem()
-            sudoku.add_variable('a', a)
+            sudoku.addVariable('a', a)
             sudoku.add_variable('b', b)
             sudoku.add_variable('c', c)
             sudoku.add_variable('d', d)
@@ -53,7 +53,7 @@ class mainAi:
             sudoku.add_variable('g', g)
             sudoku.add_variable('h', h)
             sudoku.add_variable('i', i)
-            sudoku.AllDiferentConstraint()
+            sudoku.addConstraint()
 
 
             return sudoku.iter_solutions().next();
