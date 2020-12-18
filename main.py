@@ -41,15 +41,6 @@ class mainAi:
         except NameError:
             return NameError
 
-    def fieldConstraintGrid(self, array):
-        try:
-
-
-            return answer
-        except:
-            # fail_constraint()
-            print('Failed GridConstraint')
-
 if __name__ == '__main__':
     startTime = time.time()
     #gui.main()
