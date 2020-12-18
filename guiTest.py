@@ -27,10 +27,12 @@ class InterfaceGUI:
         program.add_command(label='Restart')
 
         # self.guiBuilder(window)
-
         frame0 = ttk.Frame(window)
-        frame0.config(height=180, width=180)
-        frame0.place(x=5, y=5)
+        frame0.place(x=5, y=5, height=180, width=180)
+
+        field000 = ttk.Entry(frame0, justify=CENTER, font=("Cambria", "32", "bold"))
+        field000.place(x=0, y=0, height=60, width=60)
+
 
         # Frames, 9x9 grid # 3 values there
 
@@ -54,13 +56,11 @@ class InterfaceGUI:
         fields = []
 
         frame_diff = 189  # dont forget 5 px border
-
         field_diff = 61
 
         for x in range(9):
             frames.append("frames" + str(x))
-        # left_field_pointer = 0
-        # level_pointer = 0
+        
         varX = 0
         varY = 0
         for array_num in range(9):
