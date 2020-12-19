@@ -33,3 +33,6 @@ How to solve: Eleminate numbers by looking at Rows and do not guess
 ### Ideas for later:
 - Read & Solve layouts
 - Save layouts
+
+automated GUI compilation time 0.00579s, code size ~45 lines
+pre-declared GUI compilation time 0.05486s, code size ~ 300 lines

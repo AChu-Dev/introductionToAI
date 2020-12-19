@@ -1,10 +1,16 @@
 from tkinter import *
 from tkinter import ttk
 
+
 def main():
     root = Tk()
     gui = InterfaceGUI(root)
     root.mainloop()
+
+
+def loadData(data):
+    pass
+
 
 class InterfaceGUI:
     def __init__(self, window=None):
@@ -24,83 +30,51 @@ class InterfaceGUI:
 
         program.add_command(label='Restart')
 
-        # Frames, 9x9 grid
-        frame0 = ttk.Frame(window)
-        frame0.config(height=180, width=180)
-        frame0.place(x=5, y=5)
+        self.guiBuilder(window)
 
-        frame1 = ttk.Frame(window)
-        frame1.config(height=180, width=180)
-        frame1.place(x=194, y=5)
+    def guiBuilder(self, window):
+        frames = []
+        fields = []
 
-        frame2 = ttk.Frame(window)
-        frame2.config(height=180, width=180)
-        frame2.place(x=383, y=5)
+        # define frame names
 
-        frame3 = ttk.Frame(window)
-        frame3.config(height=180, width=180)
-        frame3.place(x=5, y=194)
+        for x in range(9):
+            frames.append("frame" + str(x))
+            self.field_names(x, fields)
 
-        frame4 = ttk.Frame(window)
-        frame4.config(height=180, width=180)
-        frame4.place(x=194, y=194)
+        var_x = 0
+        var_y = 0
+        for array_num in range(9):
+            frames[array_num] = ttk.Frame(window)
+            frames[array_num].place(x=(189 * var_x) + 5, y=(189 * var_y) + 5, height=180, width=180)
+            self.fields_manager(frames[array_num], fields)
+            var_x += 1
+            if var_x == 3:
+                var_x = 0
+                var_y += 1
 
-        frame5 = ttk.Frame(window)
-        frame5.config(height=180, width=180)
-        frame5.place(x=383, y=194)
+    def field_names(self, frame_num, fields):
+        for x in range(3):
+            for y in range(3):
+                fields.append("field" + str(frame_num) + str(x) + str(y))
 
-        frame6 = ttk.Frame(window)
-        frame6.config(height=180, width=180)
-        frame6.place(x=5, y=383)
+    def fields_manager(self, frame_num, fields):
+        var_x = 0
+        var_y = 0
+        for array_num2 in range(9):
+            fields[array_num2] = ttk.Entry(frame_num, justify=CENTER)
+            fields[array_num2].place(x=(61 * var_x), y=(61 * var_y), height=60, width=60)
+            var_x += 1
+            if var_x == 3:
+                var_x = 0
+                var_y += 1
 
-        frame7 = ttk.Frame(window)
-        frame7.config(height=180, width=180)
-        frame7.place(x=194, y=383)
-
-        frame8 = ttk.Frame(window)
-        frame8.config(height=180, width=180)
-        frame8.place(x=383, y=383)
-        # Text Boxies
-        field00 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
-        field00.place(x=0, y=0, height=60, width=60)
-
-        field01 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
-        field01.place(x=61, y=0, height=60, width=60)
-
-        field02 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
-        field02.place(x=122, y=0, height=60, width=60)
-
-        field10 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
-        field10.place(x=0, y=61, height=60, width=60)
-
-        field11 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
-        field11.place(x=61, y=61, height=60, width=60)
-
-        field12 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
-        field12.place(x=122, y=61, height=60, width=60)
-
-        field20 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
-        field20.place(x=0, y=122, height=60, width=60)
-
-        field21 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
-        field21.place(x=61, y=122, height=60, width=60)
-
-        field22 = ttk.Entry(frame8, justify=CENTER, font=("Cambria", "32", "bold"))
-        field22.place(x=122, y=122, height=60, width=60)
-
-        buttonDisable = ttk.Button(frame7, text="Disable field22", command=lambda: field22.config(state=DISABLED))
-        buttonDisable.place(height=20, width= 100)
-
-        buttonEnable = ttk.Button(frame7, text="Enable field22", command=lambda: field22.config(state=NORMAL))
-        buttonEnable.place(x=0, y=40, height=20, width=100)
-
-    def loadData(self, array):
-        pass
     def updateData(self, x, y, value):
         pass
+
     def restart(self):
         pass
 
 
-if __name__ == '__main__': # for testing purposes it will stay here
+if __name__ == '__main__':  # for testing purposes it will stay here
     main()
