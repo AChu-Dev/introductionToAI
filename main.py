@@ -3,7 +3,11 @@ import gui
 import time
 import numpy as np
 import matplotlib.pyplot as plt
+<<<<<<< HEAD
 
+=======
+# from pyconstraints import Problem
+>>>>>>> 1810bfd48f3d7f98282dc16ac742443d31376e81
 from sklearn import linear_model as lm
 
 print('TensorFlow version: ', tf.__version__)
