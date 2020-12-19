@@ -19,7 +19,7 @@ class mainAi:
     #insertChecker(aiData)
     print(tf.reduce_sum(tf.random.normal([1000, 1000])))
 
-    def find_empty_spaces(self, array): # time O(n^2), space O(1), statement to check if still valid,
+    def findEmptySpace(self, array): # time O(n^2), space O(1), statement to check if still valid,
         # idea 1, pointer checker time: O(n), space O(n)
         # idea 2, recursive check, time O(Log(n)), space O(Log(n))
         for x in range(len(array) - 1):
@@ -41,19 +41,19 @@ class mainAi:
         except NameError:
             return NameError
 
-    # def fieldConstraintGrid(self, a, b, c, d, e, f, g, h, i):
-    #     try:
-    #         sudoku = Problem()
-    #         sudoku.addVariable('a', a)
-    #         sudoku.add_variable('b', b)
-    #         sudoku.add_variable('c', c)
-    #         sudoku.add_variable('d', d)
-    #         sudoku.add_variable('e', e)
-    #         sudoku.add_variable('f', f)
-    #         sudoku.add_variable('g', g)
-    #         sudoku.add_variable('h', h)
-    #         sudoku.add_variable('i', i)
-    #         sudoku.addConstraint()
+    def fieldConstraintGrid(self, a, b, c, d, e, f, g, h, i):
+        try:
+            sudoku = Problem()
+            sudoku.addVariable('a', a)
+            sudoku.add_variable('b', b)
+            sudoku.add_variable('c', c)
+            sudoku.add_variable('d', d)
+            sudoku.add_variable('e', e)
+            sudoku.add_variable('f', f)
+            sudoku.add_variable('g', g)
+            sudoku.add_variable('h', h)
+            sudoku.add_variable('i', i)
+            sudoku.addConstraint()
 
 
             return sudoku.iter_solutions().next();
@@ -63,7 +63,6 @@ class mainAi:
 
 if __name__ == '__main__':
     startTime = time.time()
-    # gui.main()
-
+    gui.main()
 
     print(f"{(time.time() - startTime)} Compilation Time")
