@@ -342,7 +342,7 @@ class InterfaceGUI:
         except:
             pass
 
-<<<<<<< HEAD
+# <<<<<<< HEAD
         self.guiBuilder()
 
 
@@ -620,8 +620,8 @@ class InterfaceGUI:
 
         field720 = ttk.Entry(frame7, justify=CENTER, font=("Cambria", "32", "bold"))
         field720.place(x=0, y=122, height=60, width=60)
-=======
->>>>>>> 1810bfd48f3d7f98282dc16ac742443d31376e81
+#=======
+#>>>>>>> 1810bfd48f3d7f98282dc16ac742443d31376e81
 
 
     def updateData(self, x, y, value):
