@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, filedialog
 
 
 def main():
@@ -7,10 +7,16 @@ def main():
     gui = InterfaceGUI(root)
     root.mainloop()
 
+# To implement:
+#       Limit on entry boxes
+#
 
-def load_data(data):
+def open_file():
+    filename = filedialog.askopenfile(title="Select a File", filetypes=(
+        ("Text File", "*.txt"), ("Csv File", "*.csv"), ("Excel", "*.xlsx"), ("JSON File", "*.json")))
+
+def clear():
     pass
-
 
 class InterfaceGUI:
     def __init__(self, window=None):
@@ -28,7 +34,8 @@ class InterfaceGUI:
 
         menuBar.add_cascade(menu=program, label='Program')
 
-        program.add_command(label='Restart')
+        program.add_command(label='Open File', command=lambda: open_file())
+        program.add_command(label="Clear", command=lambda: clear())
 
         self.__guiBuilder(window)
 
@@ -72,8 +79,6 @@ class InterfaceGUI:
     def updateData(self, x, y, value):
         pass
 
-    def clear(self):
-        pass
 
 
 if __name__ == '__main__':  # for testing purposes it will stay here
