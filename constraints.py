@@ -121,10 +121,10 @@ def grid9Constraints(sudoku):
             verti9 += 1
             counter += 1
             if (counter == 9):
-                print("Sudoku is correct")
+                print("Sudoku is correct if ignoring Grid Rules which now are being tested\n")
                 return True
         else:
-            print("Failed Diagonal Constraints")
+            print("Failed Vertical / Horizontal Constraints")
             return False
 
 
@@ -169,25 +169,30 @@ def mainConstraint(sudoku):
                  sudoku[69], sudoku[70], sudoku[71],
                  sudoku[78], sudoku[79], sudoku[80]])
 
-            if grid1 and grid2 and grid3 and grid4 and grid5 and grid6 and grid7 and grid8 and grid9:
-                print("Sudoku is correct!")
-                return True
-            else:
-                print("Sudoku is incorrect...")
-                print("Grid 1: " + str(grid1) + "\n")
-                print("Grid 2: " + str(grid2) + "\n")
-                print("Grid 3: " + str(grid3) + "\n")
-                print("Grid 4: " + str(grid4) + "\n")
-                print("Grid 5: " + str(grid5) + "\n")
-                print("Grid 6: " + str(grid6) + "\n")
-                print("Grid 7: " + str(grid7) + "\n")
-                print("Grid 8: " + str(grid8) + "\n")
-                print("Grid 9: " + str(grid9) + "\n")
-
-                return False
+            if test:
+                if grid1 and grid2 and grid3 and grid4 and grid5 and grid6 and grid7 and grid8 and grid9:
+                    print("Sudoku is correct! Following Both 9*9 Rules and 3*3 Rules")
+                    return True
+                elif not grid1 or not grid2 or not grid3 or not grid4 or not grid5 or not grid6 or not grid7 or not grid8 or not grid9:
+                    print("Sudoku is correct! But it only follows the rules for 9*9 Sudoku")
+                    return True
+                else:
+                    print("Sudoku is incorrect...")
+                    print("The Overall Sudoku: " + str(test))
+                    print("Grid 1: " + str(grid1) + "\n")
+                    print("Grid 2: " + str(grid2) + "\n")
+                    print("Grid 3: " + str(grid3) + "\n")
+                    print("Grid 4: " + str(grid4) + "\n")
+                    print("Grid 5: " + str(grid5) + "\n")
+                    print("Grid 6: " + str(grid6) + "\n")
+                    print("Grid 7: " + str(grid7) + "\n")
+                    print("Grid 8: " + str(grid8) + "\n")
+                    print("Grid 9: " + str(grid9) + "\n")
+                    return False
 
 
 # Main Below For testing puproses
+
 
 sudoku = [3, 9, 1, 2, 8, 6, 5, 7, 4,
           4, 8, 7, 3, 5, 9, 1, 2, 6,
