@@ -40,29 +40,61 @@ class mainAi:
             return True
         except NameError:
             return NameError
+    def checkSubGrid(self, array, subArray, variable):
+        for x in range(9):
+            if array[subArray][x] == variable:
+                return False
+        else:
+            return True
 
-    def fieldConstraintGrid(self, a, b, c, d, e, f, g, h, i):
-        try:
-            sudoku = Problem()
-            sudoku.addVariable('a', a)
-            sudoku.add_variable('b', b)
-            sudoku.add_variable('c', c)
-            sudoku.add_variable('d', d)
-            sudoku.add_variable('e', e)
-            sudoku.add_variable('f', f)
-            sudoku.add_variable('g', g)
-            sudoku.add_variable('h', h)
-            sudoku.add_variable('i', i)
-            sudoku.addConstraint()
+    def checkRow(self, array, subArray, variable):
+        row = 0
+        if array == 0 or array == 1 or array == 2:
+            pass
+        elif array == 3 or array == 4 or array == 5:
+            pass
+        elif array == 6 or array == 7 or array == 8:
+            pass
 
+    def checkColumn(self, array, subArray, variable):
+        if array == 0 or array == 3 or array == 6:
+            pass
+        elif array == 1 or array == 4 or array == 7:
+            pass
+        elif array == 2 or array == 5 or array == 8:
+            pass
 
-            return sudoku.iter_solutions().next();
-        except:
-            # fail_constraint()
-            print('Failed GridConstraint')
 
 if __name__ == '__main__':
     startTime = time.time()
     gui.main()
 
     print(f"{(time.time() - startTime)} Compilation Time")
+
+# 0  1  2| 0  1  2| 0  1  2
+# 3  4  5| 3  4  5| 3  4  5
+# 6  7  8| 6  7  8| 6  7  8
+# ----------------------------
+# 0  1  2| 0  1  2| 0  1  2
+# 3  4  5| 3  4  5| 3  4  5
+# 6  7  8| 6  7  8| 6  7  8
+# -----------------------------
+# 0  1  2| 0  1  2| 0  1  2
+# 3  4  5| 3  4  5| 3  4  5
+# 6  7  8| 6  7  8| 6  7  8
+
+# 0  1  2
+# 3  4  5
+# 6  7  8
+
+# 0  1  2 | 3  4  5 | 6  7  8
+# 9  10 11| 12 13 14| 15 16 17
+# 18 19 20| 21 22 23| 24 25 26
+# ----------------------------
+# 27 28 29| 30 31 32| 33 34 35
+# 36 37 38| 39 40 41| 42 43 44
+# 45 46 47| 48 49 50| 51 52 53
+# -----------------------------
+# 54 55 56| 57 58 59| 60 61 62
+# 63 64 65| 66 67 68| 69 70 71
+# 72 73 74| 75 76 77| 78 79 80
