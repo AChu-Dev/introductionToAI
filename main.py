@@ -3,7 +3,6 @@ import gui
 import time
 import numpy as np
 import matplotlib.pyplot as plt
-# from pyconstraints import Problem
 from sklearn import linear_model as lm
 
 print('TensorFlow version: ', tf.__version__)
@@ -19,27 +18,43 @@ class mainAi:
     #insertChecker(aiData)
     print(tf.reduce_sum(tf.random.normal([1000, 1000])))
 
+
+    def dataChecker(self, array):
+        pass
+        # try:
+        #     leftPointer = 0
+        #     levelPointer = 0
+        #     while levelPointer == 8 and leftPointer == 8:
+        #         if leftPointer == 8:
+        #             leftPointer = 0
+        #             levelPointer += 1
+        #         if array[levelPointer][leftPointer] < 0 or array[levelPointer][leftPointer] > 9:
+        #             return False
+        #     return True
+        # except NameError:
+        #     return NameError
+
     def findEmptySpace(self, array): # time O(n^2), space O(1), statement to check if still valid,
         # idea 1, pointer checker time: O(n), space O(n)
         # idea 2, recursive check, time O(Log(n)), space O(Log(n))
         for x in range(len(array) - 1):
             for y in range(x+1, len(array)):
                 if y == 0:
-                    x = input('Insert data for x: ', x, 'y:', y)
+                  self.fillEmptySpace(array[x][y])
 
-    def dataChecker(self, array):
-        try:
-            leftPointer = 0
-            levelPointer = 0
-            while levelPointer == 8 and leftPointer == 8:
-                if leftPointer == 8:
-                    leftPointer = 0
-                    levelPointer += 1
-                if array[levelPointer][leftPointer] < 0 or array[levelPointer][leftPointer] > 9:
-                    return False
-            return True
-        except NameError:
-            return NameError
+    def fillEmptySpace(self, emptySpace):
+        variables = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        while self.checkColumn() and self.checkRow() and self.checkSubGrid():
+            pass
+        # for x in variables:
+        #     emptySpace = x
+        #     if not self.checkSubGrid():
+        #         x += 1
+        #     elif not self.checkRow():
+        #         x += 1
+        #     elif not self.checkColumn():
+        #         x += 1
+
     def checkSubGrid(self, array, subArray, variable):
         for x in range(9):
             if array[subArray][x] == variable:
