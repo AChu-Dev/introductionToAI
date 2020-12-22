@@ -44,16 +44,14 @@ class mainAi:
 
     def fillEmptySpace(self, emptySpace):
         variables = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        while self.checkColumn() and self.checkRow() and self.checkSubGrid():
-            pass
-        # for x in variables:
-        #     emptySpace = x
-        #     if not self.checkSubGrid():
-        #         x += 1
-        #     elif not self.checkRow():
-        #         x += 1
-        #     elif not self.checkColumn():
-        #         x += 1
+        for x in variables:
+            emptySpace = x
+            if not self.checkSubGrid():
+                x += 1
+            elif not self.checkRow():
+                x += 1
+            elif not self.checkColumn():
+                x += 1
 
     def checkSubGrid(self, array, subArray, variable):
         for x in range(9):
