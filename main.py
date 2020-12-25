@@ -35,7 +35,7 @@ class mainAi:
         # idea 2, recursive check, time O(Log(n)), space O(Log(n))
         for x in range(len(array) - 1):
             for y in range(x+1, len(array)):
-                if y == 0:
+                if array[x][y] == 0:
                   self.fillEmptySpace(array, x, y)
         else:
             return array
@@ -43,12 +43,10 @@ class mainAi:
     def fillEmptySpace(self, array, x, y):
         variables = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         for var in variables:
-            if not self.checkSubGrid(array, x, var):
+            if not self.checkSubGrid(array, x, var) or not self.checkRow(array, x, var) or not self.checkColumn(array, x, var):
                 var += 1
-            elif not self.checkRow(array, x, var):
-                var += 1
-            elif not self.checkColumn(array, x, var):
-                var += 1
+            elif var == 9:
+                self.backtrack()
 
     def checkSubGrid(self, array, subArray, variable):
         for x in range(9):
@@ -74,6 +72,8 @@ class mainAi:
         elif array == 2 or array == 5 or array == 8:
             pass
 
+    def backtrack(self):
+        pass
 
 if __name__ == '__main__':
     startTime = time.time()
