@@ -13,11 +13,7 @@ class mainAi:
         data = input('Insert data ')
         self.__aiData = data
 
-
-
-    #insertChecker(aiData)
     print(tf.reduce_sum(tf.random.normal([1000, 1000])))
-
 
     def dataChecker(self, array):
         pass
@@ -40,18 +36,19 @@ class mainAi:
         for x in range(len(array) - 1):
             for y in range(x+1, len(array)):
                 if y == 0:
-                  self.fillEmptySpace(array[x][y])
+                  self.fillEmptySpace(array, x, y)
+        else:
+            return array
 
-    def fillEmptySpace(self, emptySpace):
+    def fillEmptySpace(self, array, x, y):
         variables = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        for x in variables:
-            emptySpace = x
-            if not self.checkSubGrid():
-                x += 1
-            elif not self.checkRow():
-                x += 1
-            elif not self.checkColumn():
-                x += 1
+        for var in variables:
+            if not self.checkSubGrid(array, x, var):
+                var += 1
+            elif not self.checkRow(array, x, var):
+                var += 1
+            elif not self.checkColumn(array, x, var):
+                var += 1
 
     def checkSubGrid(self, array, subArray, variable):
         for x in range(9):
