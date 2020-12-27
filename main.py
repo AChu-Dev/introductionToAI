@@ -10,19 +10,19 @@ print('TensorFlow version: ', tf.__version__)
 
 
 def dataChecker(array):
-    # try:
-    for x in range(9):
-        if len(array[x]) != 9:
-            print("Not sufficent number of arrays")
-            break
-        for y in range(9):
-            if array[x][y] < 0 or array[x][y] > 9:
-                print("Values incorrect")
+    try:
+        for x in range(9):
+            if len(array[x]) != 9:
+                print("Not sufficent number of arrays")
                 break
-    else:
-        findEmptySpace(array)
-    # except Exception:
-    #     print("Exception has occured:", Exception())
+            for y in range(9):
+                if array[x][y] < 0 or array[x][y] > 9:
+                    print("Values incorrect")
+                    break
+        else:
+            findEmptySpace(array)
+    except Exception:
+        print("Exception has occured:", Exception())
     # try:
     #     leftPointer = 0
     #     levelPointer = 0
@@ -44,15 +44,15 @@ def findEmptySpace(array):
     else:
         print(array)
 
-def fillEmptySpace(array, x, y):
-    for var in range(1, 10):
+def fillEmptySpace(array, x, y, startPoint = 1):
+    for var in range(startPoint, 10):
         if not checkSubGrid(array, x, var) or not checkRow(array, x, y, var) or not checkColumn(array, x, y, var):
             var += 1
         else:
             array[x][y] = var
             break
     else:
-        backtrack()
+        backtrack(array)
 def checkSubGrid(array, x, variable):
     for y in range(9):
         if array[x][y] == variable:
@@ -64,54 +64,67 @@ def checkSubGrid(array, x, variable):
 
 def checkRow(array, x, y, variable):
     if x == 0 or x == 1 or x == 2:
-        varX = [0, 1, 2]
+        rowX = [0, 1, 2]
     elif x == 3 or x == 4 or x == 5:
-        varX = [3, 4, 5]
+        rowX = [3, 4, 5]
     elif x == 6 or x == 7 or x == 8:
-        varX = [6, 7, 8]
+        rowX = [6, 7, 8]
 
     if y == 0 or y == 1 or y == 2:
-        varY = [0, 1, 2]
+        rowY = [0, 1, 2]
     elif y == 3 or y == 4 or y == 5:
-        varY = [3, 4, 5]
+        rowY = [3, 4, 5]
     elif y == 6 or y == 7 or y == 8:
-        varY = [6, 7, 8]
+        rowY = [6, 7, 8]
 
-    for forX in varX:
-        for forY in varY:
+    for forX in rowX:
+        print(rowX)
+        for forY in rowY:
+            print("X ", forX, "Y ", forY, "Variable ", variable, "Variable in the unit ", array[forX][forY])
             if array[forX][forY] == variable:
-                print("Row", x, y, "Variable False", variable)
+                print("Unit Value", array[forX][forY], "Variable False", variable)
                 return False
-        else:
-            print("Row",x ,y, "Variable True", variable)
-            return True
+    else:
+        print("Unit Value", array[forX][forY], "Variable True", variable)
+        return True
 def checkColumn(array, x, y, variable):
     if x == 0 or x == 3 or x == 6:
-        varX = [0, 3, 6]
+        columnX = [0, 3, 6]
     elif x == 1 or x == 4 or x == 7:
-        varX = [1, 4, 7]
+        columnX = [1, 4, 7]
     elif x == 2 or x == 5 or x == 8:
-        varX = [2, 5, 8]
+        columnX = [2, 5, 8]
 
     if y == 0 or y == 1 or y == 2:
-        varY = [0, 1, 2]
+        columnY = [0, 1, 2]
     elif y == 3 or y == 4 or y == 5:
-        varY = [3, 4, 5]
+        columnY = [3, 4, 5]
     elif y == 6 or y == 7 or y == 8:
-        varY = [6, 7, 8]
+        columnY = [6, 7, 8]
 
-    for forX in varX:
-        for forY in varY:
-            if array[forX][forY] == variable:
+    for forX in columnX:
+        for forY in columnY:
+            if array[forX][forY] != variable:
                 print("Column", x, y, "variable False", variable)
-                return False
-        else:
-            print("Column", x, y, "variable True", variable)
-            return True
+                return True
+    else:
+        print("Column", x, y, "variable True", variable)
+        return False
 
-def backtrack():
+def backtrack(array):
     print('Backtrack')
-    pass
+    try:
+        lastPosition = variableArray.pop()      # Array contents [x, y, value]
+
+    except Exception:
+        print("Exception Backtrack: ", Exception)
+def save(arrayOfValues):
+    global variableArray
+    try:
+        variableArray.append(arrayOfValues)
+    except Exception:
+        print("Saving Exception ", Exception)
+
 
 if __name__ == '__main__':
     startTime = time.time()
