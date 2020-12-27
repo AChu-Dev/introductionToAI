@@ -8,77 +8,86 @@ from sklearn import linear_model as lm
 print('TensorFlow version: ', tf.__version__)
 
 
-class mainAi:
-    def __init__(self):
-        data = input('Insert data ')
-        self.__aiData = data
 
-    print(tf.reduce_sum(tf.random.normal([1000, 1000])))
-
-    def dataChecker(self, array):
-        pass
-        # try:
-        #     leftPointer = 0
-        #     levelPointer = 0
-        #     while levelPointer == 8 and leftPointer == 8:
-        #         if leftPointer == 8:
-        #             leftPointer = 0
-        #             levelPointer += 1
-        #         if array[levelPointer][leftPointer] < 0 or array[levelPointer][leftPointer] > 9:
-        #             return False
-        #     return True
-        # except NameError:
-        #     return NameError
-
-    def findEmptySpace(self, array): # time O(n^2), space O(1), statement to check if still valid,
-        # idea 1, pointer checker time: O(n), space O(n)
-        # idea 2, recursive check, time O(Log(n)), space O(Log(n))
-        for x in range(len(array) - 1):
-            for y in range(x+1, len(array)):
-                if array[x][y] == 0:
-                  self.fillEmptySpace(array, x, y)
-        else:
-            return array
-
-    def fillEmptySpace(self, array, x, y):
-        variables = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        for var in variables:
-            if not self.checkSubGrid(array, x, var) or not self.checkRow(array, x, var) or not self.checkColumn(array, x, var):
-                var += 1
-            elif var == 9:
-                self.backtrack()
-
-    def checkSubGrid(self, array, subArray, variable):
+def dataChecker(array):
+    try:
         for x in range(9):
-            if array[subArray][x] == variable:
-                return False
+            if len(array[x]) != 9:
+                print("Not sufficent number of arrays")
+                break
+            for y in range(9):
+                if array[x][y] < 0 or array[x][y] > 9:
+                    print("Values incorrect")
+                    break
         else:
-            return True
+            findEmptySpace(array)
+    except Exception:
+        print("Exception has occured:", Exception)
+    # try:
+    #     leftPointer = 0
+    #     levelPointer = 0
+    #     while levelPointer == 8 and leftPointer == 8:
+    #         if leftPointer == 8:
+    #             leftPointer = 0
+    #             levelPointer += 1
+    #         if array[levelPointer][leftPointer] < 0 or array[levelPointer][leftPointer] > 9:
+    #             return False
+    #     return True
+    # except NameError:
+    #     return NameError
 
-    def checkRow(self, array, subArray, variable):
-        row = 0
-        if array == 0 or array == 1 or array == 2:
-            pass
-        elif array == 3 or array == 4 or array == 5:
-            pass
-        elif array == 6 or array == 7 or array == 8:
-            pass
+def findEmptySpace(array):
+    for x in range(len(array) - 1):
+        for y in range(x + 1, len(array)):
+            if array[x][y] == 0:
+                fillEmptySpace(array, x, y)
+    else:
+        return array
 
-    def checkColumn(self, array, subArray, variable):
-        if array == 0 or array == 3 or array == 6:
-            pass
-        elif array == 1 or array == 4 or array == 7:
-            pass
-        elif array == 2 or array == 5 or array == 8:
-            pass
+def fillEmptySpace(array, x, y):
+    variables = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    for var in variables:
+        if not checkSubGrid(array, x, var) or not checkRow(array, x, var) or not checkColumn(array,
+                                                                                                            x, var):
+            var += 1
+        elif var == 9:
+            backtrack()
 
-    def backtrack(self):
+def checkSubGrid(array, subArray, variable):
+    for x in range(9):
+        if array[subArray][x] == variable:
+            return False
+    else:
+        return True
+
+def checkRow(array, subArray, variable):
+    row = 0
+    if array == 0 or array == 1 or array == 2:
         pass
+    elif array == 3 or array == 4 or array == 5:
+        pass
+    elif array == 6 or array == 7 or array == 8:
+        pass
+
+def checkColumn(array, subArray, variable):
+    if array == 0 or array == 3 or array == 6:
+        pass
+    elif array == 1 or array == 4 or array == 7:
+        pass
+    elif array == 2 or array == 5 or array == 8:
+        pass
+
+def backtrack():
+    pass
+def __str__():
+    pass
 
 if __name__ == '__main__':
     startTime = time.time()
-    gui.main()
-
+    # gui.main()
+    dataChecker([[9, 0, 0, 8, 0, 1, 0, 7, 5], [1, 0, 0, 0, 9, 0, 0, 8, 4], [0, 0, 2, 0, 0, 0, 0, 0, 0],
+                [4, 3, 0, 5, 1, 8, 0, 9, 6], [0, 2, 0, 7, 0, 0, 4, 1, 0], [5, 6, 1, 4, 0, 9, 3, 0, 0],
+                [0, 0, 0, 0, 6, 0, 7, 0, 2], [0, 7, 0, 0, 3, 1, 5, 4, 0], [0, 0 ,0, 0, 5, 0, 6, 0, 3]])
     print(f"{(time.time() - startTime)} Compilation Time")
 
 # 0  1  2| 0  1  2| 0  1  2
