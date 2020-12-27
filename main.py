@@ -22,7 +22,7 @@ def dataChecker(array):
         else:
             findEmptySpace(array)
     except Exception:
-        print("Exception has occured:", Exception)
+        print("Exception has occured:")
     # try:
     #     leftPointer = 0
     #     levelPointer = 0
@@ -37,21 +37,22 @@ def dataChecker(array):
     #     return NameError
 
 def findEmptySpace(array):
-    for x in range(len(array) - 1):
-        for y in range(x + 1, len(array)):
+    for x in range(len(array)):
+        for y in range(len(array)):
             if array[x][y] == 0:
+                print(array[x][y], x, y)
                 fillEmptySpace(array, x, y)
     else:
-        return array
+        print(array)
 
 def fillEmptySpace(array, x, y):
     variables = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     for var in variables:
-        if not checkSubGrid(array, x, var) or not checkRow(array, x, var) or not checkColumn(array,
-                                                                                                            x, var):
+        if not checkSubGrid(array, x, var) or not checkRow(array, x, var) or not checkColumn(array, x, var):
             var += 1
         elif var == 9:
             backtrack()
+        array[x][y] = var
 
 def checkSubGrid(array, subArray, variable):
     for x in range(9):
@@ -79,8 +80,6 @@ def checkColumn(array, subArray, variable):
 
 def backtrack():
     pass
-def __str__():
-    pass
 
 if __name__ == '__main__':
     startTime = time.time()
@@ -88,6 +87,7 @@ if __name__ == '__main__':
     dataChecker([[9, 0, 0, 8, 0, 1, 0, 7, 5], [1, 0, 0, 0, 9, 0, 0, 8, 4], [0, 0, 2, 0, 0, 0, 0, 0, 0],
                 [4, 3, 0, 5, 1, 8, 0, 9, 6], [0, 2, 0, 7, 0, 0, 4, 1, 0], [5, 6, 1, 4, 0, 9, 3, 0, 0],
                 [0, 0, 0, 0, 6, 0, 7, 0, 2], [0, 7, 0, 0, 3, 1, 5, 4, 0], [0, 0 ,0, 0, 5, 0, 6, 0, 3]])
+
     print(f"{(time.time() - startTime)} Compilation Time")
 
 # 0  1  2| 0  1  2| 0  1  2
