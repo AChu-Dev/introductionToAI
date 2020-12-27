@@ -10,19 +10,19 @@ print('TensorFlow version: ', tf.__version__)
 
 
 def dataChecker(array):
-    try:
-        for x in range(9):
-            if len(array[x]) != 9:
-                print("Not sufficent number of arrays")
+    # try:
+    for x in range(9):
+        if len(array[x]) != 9:
+            print("Not sufficent number of arrays")
+            break
+        for y in range(9):
+            if array[x][y] < 0 or array[x][y] > 9:
+                print("Values incorrect")
                 break
-            for y in range(9):
-                if array[x][y] < 0 or array[x][y] > 9:
-                    print("Values incorrect")
-                    break
-        else:
-            findEmptySpace(array)
-    except Exception:
-        print("Exception has occured:")
+    else:
+        findEmptySpace(array)
+    # except Exception:
+    #     print("Exception has occured:", Exception())
     # try:
     #     leftPointer = 0
     #     levelPointer = 0
@@ -40,45 +40,77 @@ def findEmptySpace(array):
     for x in range(len(array)):
         for y in range(len(array)):
             if array[x][y] == 0:
-                print(array[x][y], x, y)
                 fillEmptySpace(array, x, y)
     else:
         print(array)
 
 def fillEmptySpace(array, x, y):
-    variables = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    for var in variables:
-        if not checkSubGrid(array, x, var) or not checkRow(array, x, var) or not checkColumn(array, x, var):
+    for var in range(1, 10):
+        if not checkSubGrid(array, x, var) or not checkRow(array, x, y, var) or not checkColumn(array, x, y, var):
             var += 1
-        elif var == 9:
-            backtrack()
-        array[x][y] = var
-
-def checkSubGrid(array, subArray, variable):
-    for x in range(9):
-        if array[subArray][x] == variable:
+        else:
+            array[x][y] = var
+            break
+    else:
+        backtrack()
+def checkSubGrid(array, x, variable):
+    for y in range(9):
+        if array[x][y] == variable:
+            print("SubGrid", x, "Variable False:", variable)
             return False
     else:
+        print("SubGrid", x, "Variable True", variable)
         return True
 
-def checkRow(array, subArray, variable):
-    row = 0
-    if array == 0 or array == 1 or array == 2:
-        pass
-    elif array == 3 or array == 4 or array == 5:
-        pass
-    elif array == 6 or array == 7 or array == 8:
-        pass
+def checkRow(array, x, y, variable):
+    if x == 0 or x == 1 or x == 2:
+        varX = [0, 1, 2]
+    elif x == 3 or x == 4 or x == 5:
+        varX = [3, 4, 5]
+    elif x == 6 or x == 7 or x == 8:
+        varX = [6, 7, 8]
 
-def checkColumn(array, subArray, variable):
-    if array == 0 or array == 3 or array == 6:
-        pass
-    elif array == 1 or array == 4 or array == 7:
-        pass
-    elif array == 2 or array == 5 or array == 8:
-        pass
+    if y == 0 or y == 1 or y == 2:
+        varY = [0, 1, 2]
+    elif y == 3 or y == 4 or y == 5:
+        varY = [3, 4, 5]
+    elif y == 6 or y == 7 or y == 8:
+        varY = [6, 7, 8]
+
+    for forX in varX:
+        for forY in varY:
+            if array[forX][forY] == variable:
+                print("Row", x, y, "Variable False", variable)
+                return False
+        else:
+            print("Row",x ,y, "Variable True", variable)
+            return True
+def checkColumn(array, x, y, variable):
+    if x == 0 or x == 3 or x == 6:
+        varX = [0, 3, 6]
+    elif x == 1 or x == 4 or x == 7:
+        varX = [1, 4, 7]
+    elif x == 2 or x == 5 or x == 8:
+        varX = [2, 5, 8]
+
+    if y == 0 or y == 1 or y == 2:
+        varY = [0, 1, 2]
+    elif y == 3 or y == 4 or y == 5:
+        varY = [3, 4, 5]
+    elif y == 6 or y == 7 or y == 8:
+        varY = [6, 7, 8]
+
+    for forX in varX:
+        for forY in varY:
+            if array[forX][forY] == variable:
+                print("Column", x, y, "variable False", variable)
+                return False
+        else:
+            print("Column", x, y, "variable True", variable)
+            return True
 
 def backtrack():
+    print('Backtrack')
     pass
 
 if __name__ == '__main__':
