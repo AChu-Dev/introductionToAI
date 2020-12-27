@@ -9,20 +9,23 @@ print('TensorFlow version: ', tf.__version__)
 
 
 
+
 def dataChecker(array):
-    try:
-        for x in range(9):
-            if len(array[x]) != 9:
-                print("Not sufficent number of arrays")
+    global variableArray
+    variableArray = []
+    #try:
+    for x in range(9):
+        if len(array[x]) != 9 or len(array) != 9:
+            print("Not sufficent number of arrays")
+            break
+        for y in range(9):
+            if array[x][y] < 0 or array[x][y] > 9:
+                print("Values incorrect")
                 break
-            for y in range(9):
-                if array[x][y] < 0 or array[x][y] > 9:
-                    print("Values incorrect")
-                    break
-        else:
-            findEmptySpace(array)
-    except Exception:
-        print("Exception has occured:", Exception())
+    else:       # change due to break statement so it does not continue
+         findEmptySpace(array)
+    # except Exception:
+    #     print("Exception has occured:", Exception)
     # try:
     #     leftPointer = 0
     #     levelPointer = 0
@@ -36,6 +39,7 @@ def dataChecker(array):
     # except NameError:
     #     return NameError
 
+
 def findEmptySpace(array):
     for x in range(len(array)):
         for y in range(len(array)):
@@ -44,23 +48,26 @@ def findEmptySpace(array):
     else:
         print(array)
 
-def fillEmptySpace(array, x, y, startPoint = 1):
+
+def fillEmptySpace(array, x, y, startPoint=1):
     for var in range(startPoint, 10):
         if not checkSubGrid(array, x, var) or not checkRow(array, x, y, var) or not checkColumn(array, x, y, var):
             var += 1
         else:
             array[x][y] = var
+            save([x, y, var])
             break
-    else:
+    else: # break and else statement issue
         backtrack(array)
+
+
 def checkSubGrid(array, x, variable):
     for y in range(9):
         if array[x][y] == variable:
-            print("SubGrid", x, "Variable False:", variable)
             return False
     else:
-        print("SubGrid", x, "Variable True", variable)
         return True
+
 
 def checkRow(array, x, y, variable):
     if x == 0 or x == 1 or x == 2:
@@ -78,15 +85,13 @@ def checkRow(array, x, y, variable):
         rowY = [6, 7, 8]
 
     for forX in rowX:
-        print(rowX)
         for forY in rowY:
-            print("X ", forX, "Y ", forY, "Variable ", variable, "Variable in the unit ", array[forX][forY])
             if array[forX][forY] == variable:
-                print("Unit Value", array[forX][forY], "Variable False", variable)
                 return False
     else:
-        print("Unit Value", array[forX][forY], "Variable True", variable)
         return True
+
+
 def checkColumn(array, x, y, variable):
     if x == 0 or x == 3 or x == 6:
         columnX = [0, 3, 6]
@@ -105,33 +110,45 @@ def checkColumn(array, x, y, variable):
     for forX in columnX:
         for forY in columnY:
             if array[forX][forY] != variable:
-                print("Column", x, y, "variable False", variable)
                 return True
     else:
-        print("Column", x, y, "variable True", variable)
         return False
+
 
 def backtrack(array):
     print('Backtrack')
-    try:
-        lastPosition = variableArray.pop()      # Array contents [x, y, value]
+   # try:
+    if len(variableArray) != 0:
+        lastPosition = variableArray.pop()  # Array contents [x, y, value]
+    else:
+        print("Sudoku cannot be solved")
+    # array[x][y] = 0
+    # print(lastPosition[0], ' ', lastPosition[1])
+    array[lastPosition[0]][lastPosition[1]] = 0
+    # print(lastPosition)
+    if lastPosition[2]+1 > 9: # check if can go back further just in case of possible solutions
+        print("Exceeds variable size")
+        backtrack(array)
+    else:
+        fillEmptySpace(array, lastPosition[0], lastPosition[1], lastPosition[2]+1)
+    # except Exception:
+    #     print("Exception Backtrack: ", Exception)
 
-    except Exception:
-        print("Exception Backtrack: ", Exception)
+
 def save(arrayOfValues):
-    global variableArray
-    try:
-        variableArray.append(arrayOfValues)
-    except Exception:
-        print("Saving Exception ", Exception)
+    #try:
+    variableArray.append(arrayOfValues)
+    print(variableArray)
+    #except Exception:
+    #    print("Saving Exception ", Exception)
 
 
 if __name__ == '__main__':
     startTime = time.time()
     # gui.main()
     dataChecker([[9, 0, 0, 8, 0, 1, 0, 7, 5], [1, 0, 0, 0, 9, 0, 0, 8, 4], [0, 0, 2, 0, 0, 0, 0, 0, 0],
-                [4, 3, 0, 5, 1, 8, 0, 9, 6], [0, 2, 0, 7, 0, 0, 4, 1, 0], [5, 6, 1, 4, 0, 9, 3, 0, 0],
-                [0, 0, 0, 0, 6, 0, 7, 0, 2], [0, 7, 0, 0, 3, 1, 5, 4, 0], [0, 0 ,0, 0, 5, 0, 6, 0, 3]])
+                 [4, 3, 0, 5, 1, 8, 0, 9, 6], [0, 2, 0, 7, 0, 0, 4, 1, 0], [5, 6, 1, 4, 0, 9, 3, 0, 0],
+                 [0, 0, 0, 0, 6, 0, 7, 0, 2], [0, 7, 0, 0, 3, 1, 5, 4, 0], [0, 0, 0, 0, 5, 0, 6, 0, 3]])
 
     print(f"{(time.time() - startTime)} Compilation Time")
 
