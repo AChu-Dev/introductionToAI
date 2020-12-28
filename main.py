@@ -125,7 +125,7 @@ def backtrack(array):
         return False
     array[lastPosition[0]][lastPosition[1]] = 0
     if lastPosition[2]+1 > 9: # check if can go back further just in case of possible solutions
-        print("Exceeds variable size")
+        print("Exceeds variable size") # This part does not work as expected
         backtrack(array)
     else:
         fillEmptySpace(array, lastPosition[0], lastPosition[1], lastPosition[2]+1)
