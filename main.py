@@ -1,14 +1,14 @@
 import tensorflow as tf
 import gui
 import time
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn import linear_model as lm
+# import numpy as np
+# import matplotlib.pyplot as plt
+# from sklearn import linear_model as lm
 
 print('TensorFlow version: ', tf.__version__)
 
 
-
+global array
 
 def dataChecker(array):
     global variableArray
@@ -16,13 +16,13 @@ def dataChecker(array):
     #try:
     for x in range(9):
         if len(array[x]) != 9 or len(array) != 9:
-            print("Not sufficent number of arrays")
+            print("Not sufficient number of arrays")
             break
         for y in range(9):
             if array[x][y] < 0 or array[x][y] > 9:
                 print("Values incorrect")
-                break
-    else:       # change due to break statement so it does not continue
+                return False
+    else:
          findEmptySpace(array)
     # except Exception:
     #     print("Exception has occured:", Exception)
@@ -56,7 +56,7 @@ def fillEmptySpace(array, x, y, startPoint=1):
         else:
             array[x][y] = var
             save([x, y, var])
-            break
+            return True
     else: # break and else statement issue
         backtrack(array)
 
@@ -122,10 +122,8 @@ def backtrack(array):
         lastPosition = variableArray.pop()  # Array contents [x, y, value]
     else:
         print("Sudoku cannot be solved")
-    # array[x][y] = 0
-    # print(lastPosition[0], ' ', lastPosition[1])
+        return False
     array[lastPosition[0]][lastPosition[1]] = 0
-    # print(lastPosition)
     if lastPosition[2]+1 > 9: # check if can go back further just in case of possible solutions
         print("Exceeds variable size")
         backtrack(array)
@@ -146,9 +144,12 @@ def save(arrayOfValues):
 if __name__ == '__main__':
     startTime = time.time()
     # gui.main()
-    dataChecker([[9, 0, 0, 8, 0, 1, 0, 7, 5], [1, 0, 0, 0, 9, 0, 0, 8, 4], [0, 0, 2, 0, 0, 0, 0, 0, 0],
-                 [4, 3, 0, 5, 1, 8, 0, 9, 6], [0, 2, 0, 7, 0, 0, 4, 1, 0], [5, 6, 1, 4, 0, 9, 3, 0, 0],
-                 [0, 0, 0, 0, 6, 0, 7, 0, 2], [0, 7, 0, 0, 3, 1, 5, 4, 0], [0, 0, 0, 0, 5, 0, 6, 0, 3]])
+    dataChecker([[0, 9, 4, 8, 1, 2, 3, 0, 0], [0, 3, 0, 7, 0, 0, 1, 9, 0], [1, 0, 0, 0, 9, 6, 0, 0, 0],
+                 [0, 3, 0, 0, 0, 8, 0, 0, 6], [9, 0, 4, 6, 1, 3, 2, 0, 0], [6, 0, 0, 0, 4, 9, 0, 0, 1],
+                 [4, 0, 3, 5, 0, 0, 0, 6, 0], [5, 0, 0, 0, 2, 0, 0, 0, 8], [0, 0, 8, 7, 0, 0, 4, 1, 5]])
+    # dataChecker([[9, 0, 0, 8, 0, 1, 0, 7, 5], [1, 0, 0, 0, 9, 0, 0, 8, 4], [0, 0, 2, 0, 0, 0, 0, 0, 0],
+    #              [4, 3, 0, 5, 1, 8, 0, 9, 6], [0, 2, 0, 7, 0, 0, 4, 1, 0], [5, 6, 1, 4, 0, 9, 3, 0, 0],
+    #              [0, 0, 0, 0, 6, 0, 7, 0, 2], [0, 7, 0, 0, 3, 1, 5, 4, 0], [0, 0, 0, 0, 5, 0, 6, 0, 3]])
 
     print(f"{(time.time() - startTime)} Compilation Time")
 
