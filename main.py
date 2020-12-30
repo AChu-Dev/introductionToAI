@@ -1,11 +1,11 @@
-import tensorflow as tf
+#import tensorflow as tf
 import gui
 import time
 # import numpy as np
 # import matplotlib.pyplot as plt
 # from sklearn import linear_model as lm
-
-print('TensorFlow version: ', tf.__version__)
+import sys
+#print('TensorFlow version: ', tf.__version__)
 
 
 global array
@@ -143,6 +143,7 @@ def save(arrayOfValues):
 
 if __name__ == '__main__':
     startTime = time.time()
+    sys.setrecursionlimit(5000)
     # gui.main()
     dataChecker([[0, 9, 4, 8, 1, 2, 3, 0, 0], [0, 3, 0, 7, 0, 0, 1, 9, 0], [1, 0, 0, 0, 9, 6, 0, 0, 0],
                  [0, 3, 0, 0, 0, 8, 0, 0, 6], [9, 0, 4, 6, 1, 3, 2, 0, 0], [6, 0, 0, 0, 4, 9, 0, 0, 1],
