@@ -1,5 +1,21 @@
+<<<<<<< HEAD
+#import tensorflow as tf
+=======
+>>>>>>> 4b3cc258e3979e1f4ebdcfa1d4543815c79dd8f1
 import gui
 import time
+<<<<<<< HEAD
+=======
+# import numpy as np
+# import matplotlib.pyplot as plt
+# from sklearn import linear_model as lm
+<<<<<<< HEAD
+import sys
+#print('TensorFlow version: ', tf.__version__)
+=======
+>>>>>>> 4b3cc258e3979e1f4ebdcfa1d4543815c79dd8f1
+
+>>>>>>> 073fceeea5a940e5256488a384bdf2ca7b771a75
 
 global array
 
@@ -209,6 +225,7 @@ def checkUniqueRange(array):
 
 if __name__ == '__main__':
     startTime = time.time()
+    sys.setrecursionlimit(5000)
     # gui.main()
     dataChecker([[0, 9, 4, 8, 1, 2, 3, 0, 0], [0, 3, 0, 7, 0, 0, 1, 9, 0], [1, 0, 0, 0, 9, 6, 0, 0, 0],
                  [0, 3, 0, 0, 0, 8, 0, 0, 6], [9, 0, 4, 6, 1, 3, 2, 0, 0], [6, 0, 0, 0, 4, 9, 0, 0, 1],

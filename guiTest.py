@@ -49,7 +49,7 @@ class InterfaceGUI:
         # frame3.place(x=5, y=194)
         #
         # frame4 = ttk.Frame(window)
-        # frame4.config(height=180, width=180)
+        # frame4.config(height=180, width=180)# # Text Boxies
         # frame4.place(x=194, y=194)
         #
         # frame5 = ttk.Frame(window)
@@ -70,7 +70,7 @@ class InterfaceGUI:
         #
         # # Text Boxes
         #
-        # # Text Boxies
+
         #
         # # frame0
         #
