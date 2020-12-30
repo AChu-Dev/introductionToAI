@@ -1,18 +1,26 @@
+<<<<<<< HEAD
 #import tensorflow as tf
+=======
+>>>>>>> 4b3cc258e3979e1f4ebdcfa1d4543815c79dd8f1
 import gui
 import time
 # import numpy as np
 # import matplotlib.pyplot as plt
 # from sklearn import linear_model as lm
+<<<<<<< HEAD
 import sys
 #print('TensorFlow version: ', tf.__version__)
+=======
+>>>>>>> 4b3cc258e3979e1f4ebdcfa1d4543815c79dd8f1
 
 
 global array
 
 def dataChecker(array):
     global variableArray
+    global backtrackArray
     variableArray = []
+    backtrackArray = []
     #try:
     for x in range(9):
         if len(array[x]) != 9 or len(array) != 9:
@@ -44,14 +52,22 @@ def findEmptySpace(array):
     for x in range(len(array)):
         for y in range(len(array)):
             if array[x][y] == 0:
+                print(x, y)
                 fillEmptySpace(array, x, y)
     else:
         print(array)
+        # z = 0
+        # for x in array:
+        #     print(array[x])
+        #     if z == 2:
+        #         z = 0
+        #         print("\n")
+        #     z += 1
 
 
-def fillEmptySpace(array, x, y, startPoint=1):
-    for var in range(startPoint, 10):
-        if not checkSubGrid(array, x, var) or not checkRow(array, x, y, var) or not checkColumn(array, x, y, var):
+def fillEmptySpace(array, x, y, startPoint=1, endPoint=10):#, value = 0):
+    for var in range(startPoint, endPoint):
+        if not checkSubGrid(array, x, var) or not checkRow(array, x, y, var) or not checkColumn(array, x, y, var):# or value != 0:
             var += 1
         else:
             array[x][y] = var
@@ -100,12 +116,12 @@ def checkColumn(array, x, y, variable):
     elif x == 2 or x == 5 or x == 8:
         columnX = [2, 5, 8]
 
-    if y == 0 or y == 1 or y == 2:
-        columnY = [0, 1, 2]
-    elif y == 3 or y == 4 or y == 5:
-        columnY = [3, 4, 5]
-    elif y == 6 or y == 7 or y == 8:
-        columnY = [6, 7, 8]
+    if y == 0 or y == 3 or y == 6:
+        columnY = [0, 3, 6]
+    elif y == 1 or y == 4 or y == 7:
+        columnY = [1, 4, 7]
+    elif y == 2 or y == 5 or y == 8:
+        columnY = [2, 5, 8]
 
     for forX in columnX:
         for forY in columnY:
@@ -119,19 +135,24 @@ def backtrack(array):
     print('Backtrack')
    # try:
     if len(variableArray) != 0:
-        lastPosition = variableArray.pop()  # Array contents [x, y, value]
+        lastPosition = variableArray.pop()
+        backtrackSave([lastPosition[0], lastPosition[1]])
     else:
-        print("Sudoku cannot be solved")
         return False
     array[lastPosition[0]][lastPosition[1]] = 0
-    if lastPosition[2]+1 > 9: # check if can go back further just in case of possible solutions
-        print("Exceeds variable size")
+    if lastPosition[2] >= 9:
         backtrack(array)
     else:
         fillEmptySpace(array, lastPosition[0], lastPosition[1], lastPosition[2]+1)
-    # except Exception:
-    #     print("Exception Backtrack: ", Exception)
 
+def backtrackSave(arrayOfBacktrackValues):
+    backtrackArray.append(arrayOfBacktrackValues)
+
+def backtrackClean():
+    for x in range(len(backtrackArray)):
+        value = backtrackArray.pop()
+
+        fillEmptySpace(array, value[0], value[1])
 
 def save(arrayOfValues):
     #try:
@@ -140,6 +161,35 @@ def save(arrayOfValues):
     #except Exception:
     #    print("Saving Exception ", Exception)
 
+
+def checkUniqueRange(array):
+    print("Checking Numbers for being in the correct format\n")
+    if (len(array) == 9):
+        # print("3 * 3 Sudoku Checker")
+        # print(str(array[1]) + "\t" + str(array[2]) + "\t" +  str(array[3]) + "\n")
+        # print(str(array[4]) + "\t" + str(array[5]) + "\t" +  str(array[6]) + "\n")
+        # print(str(array[7]) + "\t" + str(array[8]) + "\t" +  str(array[9]) + "\n")
+
+        print("array in: " + str(array))
+        arrayToSet = set(array)
+        print("Set array: " + str(arrayToSet))
+        print("length of array: " + str(len(array)))
+        print("length of set: " + str(len(arrayToSet)))
+        for x in array:
+            value = int(x)
+            print("value in array: " + str(value))
+            if (1 <= value <= 9) and (len(array) == len(arrayToSet)):
+                print("Succeded as Numbers are in Range\n")
+                return True
+            else:
+                print('Failed due to numbers being out of range or not all numbers being distinct')
+                return False
+            # print('Failed Test')
+            # return False
+    else:
+        print("Failed due to wrong number count")
+
+        return False
 
 if __name__ == '__main__':
     startTime = time.time()
