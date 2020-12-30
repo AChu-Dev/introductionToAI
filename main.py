@@ -1,9 +1,5 @@
 import gui
 import time
-# import numpy as np
-# import matplotlib.pyplot as plt
-# from sklearn import linear_model as lm
-
 
 global array
 
@@ -43,29 +39,26 @@ def findEmptySpace(array):
     for x in range(len(array)):
         for y in range(len(array)):
             if array[x][y] == 0:
-                print(x, y)
+                if len(backtrackArray) != 0:
+                    backtrackClean(array)
+                print(x, y, " findEmptySpace")
                 fillEmptySpace(array, x, y)
     else:
         print(array)
-        # z = 0
-        # for x in array:
-        #     print(array[x])
-        #     if z == 2:
-        #         z = 0
-        #         print("\n")
-        #     z += 1
 
 
-def fillEmptySpace(array, x, y, startPoint=1, endPoint=10):#, value = 0):
-    for var in range(startPoint, endPoint):
+def fillEmptySpace(array, x, y, startPoint=1):
+    for var in range(startPoint, 10):
+        print("fill", x, y)
         if not checkSubGrid(array, x, var) or not checkRow(array, x, y, var) or not checkColumn(array, x, y, var):# or value != 0:
             var += 1
         else:
             array[x][y] = var
             save([x, y, var])
+            print("Filled with ", x, y, array[x][y])
             return True
     else: # break and else statement issue
-        backtrack(array)
+        backtrack2(array, x, y)
 
 
 def checkSubGrid(array, x, variable):
@@ -116,34 +109,66 @@ def checkColumn(array, x, y, variable):
 
     for forX in columnX:
         for forY in columnY:
-            if array[forX][forY] != variable:
-                return True
+            if array[forX][forY] == variable:
+                return False
     else:
-        return False
+        return True
 
+def backtrack2(array, x, y):
+    print("back2 ", x, y, array[x][y])
+    if y == 0:
+        x -= 1
+    else:
+        y -= 1
+    if array[x][y] == 9:
+        backtrack2(array, x, y)
+    else:
+        array[x][y] += 1
+        print("back return", x, y, array[x][y])
+        fillEmptySpace(array, x, y)
 
 def backtrack(array):
     print('Backtrack')
-   # try:
-    if len(variableArray) != 0:
-        lastPosition = variableArray.pop()
-        backtrackSave([lastPosition[0], lastPosition[1]])
-    else:
-        return False
-    array[lastPosition[0]][lastPosition[1]] = 0
-    if lastPosition[2] >= 9:
+    lastPosition = variableArray.pop()
+    # newPosition = lastPosition
+    # newPosition[1] += 1
+    # newPosition[2] = 0
+    if lastPosition[2]+1 > 9:
+        lastPosition[2]=0
+        backtrackSave(lastPosition)
+        # backtrackSave(newPosition)
         backtrack(array)
     else:
-        fillEmptySpace(array, lastPosition[0], lastPosition[1], lastPosition[2]+1)
+        backtrackSave(lastPosition)
+        #backtrackSave(newPosition)
+   # try:
+   #  if len(variableArray) != 0:
+   #      lastPosition = variableArray.pop()
+   #      backtrackSave([lastPosition[0], lastPosition[1], lastPosition[2]])
+   #  else:
+   #      return False
+   #  array[lastPosition[0]][lastPosition[1]] = 0
+   #  if lastPosition[2] >= 9:
+   #      backtrack(array)
+   #  else:
+   #      fillEmptySpace(array, lastPosition[0], lastPosition[1], lastPosition[2]+1)
 
 def backtrackSave(arrayOfBacktrackValues):
-    backtrackArray.append(arrayOfBacktrackValues)
+    if len(backtrackArray) == 0:
+        print(arrayOfBacktrackValues, " appended to bactrack Save")
+        backtrackArray.append(arrayOfBacktrackValues)
+    else:
+        x = backtrackArray.pop()
+        x[2] = 0
+        backtrackArray.append(x)
+        backtrackArray.append(arrayOfBacktrackValues)
 
-def backtrackClean():
+
+def backtrackClean(array):
     for x in range(len(backtrackArray)):
         value = backtrackArray.pop()
-
-        fillEmptySpace(array, value[0], value[1])
+        print(value, " Clean backtrack memory")
+        fillEmptySpace(array, value[0], value[1], value[2]+1)
 
 def save(arrayOfValues):
     #try:
