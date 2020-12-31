@@ -22,27 +22,12 @@ def dataChecker(array):
             if array[x][y] < 0 or array[x][y] > 9:
                 print("Values incorrect")
                 return False
-    else:
-        findEmptySpace(array)
-    # except Exception:
-    #     print("Exception has occured:", Exception)
-    # try:
-    #     leftPointer = 0
-    #     levelPointer = 0
-    #     while levelPointer == 8 and leftPointer == 8:
-    #         if leftPointer == 8:
-    #             leftPointer = 0
-    #             levelPointer += 1
-    #         if array[levelPointer][leftPointer] < 0 or array[levelPointer][leftPointer] > 9:
-    #             return False
-    #     return True
-    # except NameError:
-    #     return NameError
+    findEmptySpace(array)
 
 
 def findEmptySpace(array):
     for x in range(len(array)):
-        for y in range(len(array)):
+        for y in range(len(array[0])):
             if array[x][y] == 0:
                 print(x, y)
                 fillEmptySpace(array, x, y)
@@ -57,16 +42,13 @@ def findEmptySpace(array):
         #     z += 1
 
 
-def fillEmptySpace(array, x, y, startPoint=1, endPoint=10):#, value = 0):
-    for var in range(startPoint, endPoint):
+def fillEmptySpace(array, x, y, startPoint=1):
+    for var in range(startPoint, 10):
         if not checkSubGrid(array, x, var) or not checkRow(array, x, y, var) or not checkColumn(array, x, y, var):# or value != 0:
             var += 1
         else:
             array[x][y] = var
-            save([x, y, var])
             return True
-    else: # break and else statement issue
-        backtrack(array)
 
 
 def checkSubGrid(array, x, variable):
@@ -117,11 +99,21 @@ def checkColumn(array, x, y, variable):
 
     for forX in columnX:
         for forY in columnY:
-            if array[forX][forY] != variable:
+            if array[forX][forY] == variable:
                 return False
     else:
         return True
 
+def backtrack2(array, x, y, var):
+    if y == 0:
+        x -= 1
+    else:
+        y -= 1
+    if array[x][y] >= 9:
+        backtrack2()
+    else:
+        array[x][y] + 1
+        fillEmptySpace(array, x, y)
 
 def backtrack(array):
     print('Backtrack')
