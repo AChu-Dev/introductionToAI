@@ -7,11 +7,7 @@
 def checkUniqueRange(array):
     print("Checking Numbers for being in the correct format\n")
     if (len(array) == 9):
-        # print("3 * 3 Sudoku Checker")
-        # print(str(array[1]) + "\t" + str(array[2]) + "\t" +  str(array[3]) + "\n")
-        # print(str(array[4]) + "\t" + str(array[5]) + "\t" +  str(array[6]) + "\n")
-        # print(str(array[7]) + "\t" + str(array[8]) + "\t" +  str(array[9]) + "\n")
-
+        
         print("array in: " + str(array))
         arrayToSet = set(array)
         print("Set array: " + str(arrayToSet))
@@ -36,6 +32,9 @@ def checkUniqueRange(array):
 
 def grid3Constraints(array):
     print("Checking 3 *3 Grid Constraints\n")
+    print(str(array[0]) + "\t" + str(array[1]) + "\t" +  str(array[2]) + "\n")
+    print(str(array[3]) + "\t" + str(array[4]) + "\t" +  str(array[5]) + "\n")
+    print(str(array[6]) + "\t" + str(array[7]) + "\t" +  str(array[8]) + "\n")
     horiz1 = 0
     horiz2 = 1
     horiz3 = 2
@@ -45,31 +44,31 @@ def grid3Constraints(array):
     counter = 1
     if checkUniqueRange(array) == False:
         return False
-    # Diagonal Constraints dont change so they dont need iteration
-
-    if (array[6] + array[4] + array[2] == 15) and (array[0] + array[4] + array[8] == 15):
-        print("Passed Both Diagonal Constraints")
-        for x in range(3):
-            if (array[horiz1] + array[horiz2] + array[horiz3] == 15) and (
-                    array[verti1] + array[verti2] + array[verti3] == 15):
-                print("Passed vertical & horizontal: " + str(counter))
-                horiz1 += 3
-                horiz2 += 3
-                horiz3 += 3
-                verti1 += 1
-                verti2 += 1
-                verti3 += 1
-                counter += 1
-            else:
-                print("Failed on Horizontal/Vertical: " + str(counter))
-                # print("Failed Test")
-                return False
-        print("Passed Tests")
-        return True
-
     else:
-        print("Numbers in Diagonals do not add up to 15")
-        return False
+        # Diagonal Constraints dont change so they dont need iteration
+        if (array[6] + array[4] + array[2] == 15) and (array[0] + array[4] + array[8] == 15):
+            print("Passed Both Diagonal Constraints")
+            for x in range(3):
+                if (array[horiz1] + array[horiz2] + array[horiz3] == 15) and (
+                        array[verti1] + array[verti2] + array[verti3] == 15):
+                    print("Passed vertical & horizontal test: " + str(counter))
+                    horiz1 += 3
+                    horiz2 += 3
+                    horiz3 += 3
+                    verti1 += 1
+                    verti2 += 1
+                    verti3 += 1
+                    counter += 1
+                else:
+                    print("Failed on Horizontal/Vertical: " + str(counter))
+                    return False
+            print("Passed Tests")
+            return True
+
+        else:
+            print("Numbers in Diagonals do not add up to 15")
+            return False
+    
 
 
 def grid9Constraints(sudoku):
@@ -94,7 +93,7 @@ def grid9Constraints(sudoku):
     verti9 = 72
     counter = 1
 
-    for a in range(1, 10):
+    for x in range(1, 10):
         if (checkUniqueRange(
                 [sudoku[horiz1], sudoku[horiz2], sudoku[horiz3], sudoku[horiz4], sudoku[horiz5], sudoku[horiz6],
                  sudoku[horiz7], sudoku[horiz8], sudoku[horiz9]]) and checkUniqueRange(
@@ -173,7 +172,7 @@ def mainConstraint(sudoku):
                 if grid1 and grid2 and grid3 and grid4 and grid5 and grid6 and grid7 and grid8 and grid9:
                     print("Sudoku is correct! Following Both 9*9 Rules and 3*3 Rules")
                     return True
-                elif not grid1 or not grid2 or not grid3 or not grid4 or not grid5 or not grid6 or not grid7 or not grid8 or not grid9:
+                elif test and not grid1 or not grid2 or not grid3 or not grid4 or not grid5 or not grid6 or not grid7 or not grid8 or not grid9:
                     print("Sudoku is correct! But it only follows the rules for 9*9 Sudoku")
                     return True
                 else:
@@ -204,7 +203,8 @@ sudoku = [3, 9, 1, 2, 8, 6, 5, 7, 4,
           5, 3, 8, 1, 4, 2, 9, 6, 7,
           7, 2, 6, 8, 9, 5, 3, 4, 1]
 
-mainConstraint(sudoku)
+
+#mainConstraint(sudoku)
 
 # 0  1  2 | 3  4  5 | 6  7  8
 # 9  10 11| 12 13 14| 15 16 17
@@ -217,3 +217,51 @@ mainConstraint(sudoku)
 # 54 55 56| 57 58 59| 60 61 62
 # 63 64 65| 66 67 68| 69 70 71
 # 72 73 74| 75 76 77| 78 79 80
+
+import numpy as np
+# test if a value on a specific place is possible with current data
+def possible(sudoku,rov, col, val):
+    if sudoku[rov][col] != 0:
+        return False #Already filled
+    if val in sudoku[rov]:
+        return False #Value already in row
+    for a in range(9):
+        if sudoku[a][col] == val:
+            return False #value already in column
+    sqrov = int(int(rov) / 3) * 3
+    sqcol = int(int(col) / 3) * 3
+    for r in range(sqrov, sqrov + 3):
+        for c in range(sqcol, sqcol + 3):
+            if sudoku[r][c] == val:
+                return False #value already in square
+    return True  # Value possible
+
+#solve a sudoku if possible, Fill out list
+def solve_Sudoku(sudoku):
+    for rov in range(0, 9):
+        for col in range(0, 9):
+            if sudoku[rov][col] == 0:
+                for val in range(1, 10):
+                    if possible(sudoku,rov, col, val):
+                        sudoku[rov][col] = val
+                        if solve_Sudoku(sudoku):
+                            return True
+                        sudoku[rov][col] = 0 #Backtrack
+                return False #Solution failed, backtrack for next value
+    return True
+
+solve_Sudoku(sudoku)
+print(sudoku)
+
+#Converted to numpy array
+sudoku = np.array([[0, 0, 2, 0, 1, 5, 0, 7, 8],
+                   [1, 8, 0, 0, 6, 3, 4, 0, 0],
+                   [0, 0, 4, 0, 2, 0, 5, 6, 1],
+                   [0, 9, 6, 0, 0, 7, 0, 3, 0],
+                   [0, 1, 0, 3, 0, 6, 0, 0, 5],
+                   [0, 0, 3, 2, 0, 4, 0, 9, 6],
+                   [0, 3, 0, 0, 0, 0, 0, 0, 0],
+                   [6, 4, 9, 8, 3, 0, 2, 0, 7],
+                   [0, 0, 7, 0, 0, 0, 0, 1, 0]
+                   ])
+
