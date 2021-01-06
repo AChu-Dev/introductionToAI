@@ -9,7 +9,7 @@ def sudokuSolver(array):
                 for value in range(1, 10):
                     if checkValues(array, x, y, value):
                         array[x][y] = value
-                        # backtracking
+                        # backtracking needed
     print(array)
 
 
