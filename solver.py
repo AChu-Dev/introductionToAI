@@ -1,5 +1,5 @@
 import numpy
-
+#import sys
 
 
 def sudokuSolver(array):
@@ -10,16 +10,9 @@ def sudokuSolver(array):
                 for value in range(1, 10):
                     if checkValues(array, x, y, value):
                         array[x][y] = value
-<<<<<<< HEAD
-                        # backtracking
-            if grid3Constraints(x):
-                print("Grid Follows 3*3 Sudoku Rules")
-            else:
-                print("Grid Does Not Follow 3*3 Sudoku Rules")
-=======
-                        # backtracking needed
->>>>>>> 259c1b91a9fd5beae800ab75ec0fba16ea0567a0
+                        # backtrack
     print(array)
+    return array
 
 
 def checkValues(array, x, y, value):
@@ -47,44 +40,44 @@ def checkValues(array, x, y, value):
                 return False
     return True
 
-    def grid3Constraints(array):
-        print("Checking 3 *3 Grid Constraints\n")
-        print(str(array[0]) + "\t" + str(array[1]) + "\t" +  str(array[2]) + "\n")
-        print(str(array[3]) + "\t" + str(array[4]) + "\t" +  str(array[5]) + "\n")
-        print(str(array[6]) + "\t" + str(array[7]) + "\t" +  str(array[8]) + "\n")
-        horiz1 = 0
-        horiz2 = 1
-        horiz3 = 2
-        verti1 = 0
-        verti2 = 3
-        verti3 = 6
-        counter = 1
-        if checkUniqueRange(array) == False:
-            return False
-        else:
-            # Diagonal Constraints dont change so they dont need iteration
-            if (array[6] + array[4] + array[2] == 15) and (array[0] + array[4] + array[8] == 15):
-                print("Passed Both Diagonal Constraints")
-                for x in range(3):
-                    if (array[horiz1] + array[horiz2] + array[horiz3] == 15) and (
-                            array[verti1] + array[verti2] + array[verti3] == 15):
-                        print("Passed vertical & horizontal test: " + str(counter))
-                        horiz1 += 3
-                        horiz2 += 3
-                        horiz3 += 3
-                        verti1 += 1
-                        verti2 += 1
-                        verti3 += 1
-                        counter += 1
-                    else:
-                        print("Failed on Horizontal/Vertical: " + str(counter))
-                        return False
-                print("Passed Tests")
-                return True
+def grid3Constraints(array):
+   print("Checking 3 *3 Grid Constraints\n")
+   print(str(array[0]) + "\t" + str(array[1]) + "\t" +  str(array[2]) + "\n")
+   print(str(array[3]) + "\t" + str(array[4]) + "\t" +  str(array[5]) + "\n")
+   print(str(array[6]) + "\t" + str(array[7]) + "\t" +  str(array[8]) + "\n")
+   horiz1 = 0
+   horiz2 = 1
+   horiz3 = 2
+   verti1 = 0
+   verti2 = 3
+   verti3 = 6
+   counter = 1
+   if checkUniqueRange(array) == False:
+       return False
+   else:
+       # Diagonal Constraints dont change so they dont need iteration
+       if (array[6] + array[4] + array[2] == 15) and (array[0] + array[4] + array[8] == 15):
+           print("Passed Both Diagonal Constraints")
+           for x in range(3):
+               if (array[horiz1] + array[horiz2] + array[horiz3] == 15) and (
+                       array[verti1] + array[verti2] + array[verti3] == 15):
+                   print("Passed vertical & horizontal test: " + str(counter))
+                   horiz1 += 3
+                   horiz2 += 3
+                   horiz3 += 3
+                   verti1 += 1
+                   verti2 += 1
+                   verti3 += 1
+                   counter += 1
+               else:
+                   print("Failed on Horizontal/Vertical: " + str(counter))
+                   return False
+           print("Passed Tests")
+           return True
 
-            else:
-                print("Numbers in Diagonals do not add up to 15")
-                return False
+       else:
+           print("Numbers in Diagonals do not add up to 15")
+           return False
 
 def checkUniqueRange(array):
     print("Checking Numbers for being in the correct format\n")
@@ -121,4 +114,10 @@ if __name__ == '__main__':
                          [0, 3, 0, 0, 0, 0, 0, 0, 0],
                          [6, 4, 9, 8, 3, 0, 2, 0, 7],
                          [0, 0, 7, 0, 0, 0, 0, 1, 0]])
-    sudokuSolver(array)
+    array = sudokuSolver(array)
+
+    #for x in range (1, 10):
+     #   if grid3Constraints(array[x]):
+      #      print("Grid Follows 3*3 Sudoku Rules")
+       # else:
+        #    print("Grid Does Not Follow 3*3 Sudoku Rules")
