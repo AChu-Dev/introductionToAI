@@ -229,9 +229,10 @@ def mainConstraint(sudoku):
                     print("Grid 8: " + str(grid8) + "\n")
                     print("Grid 9: " + str(grid9) + "\n")
                     return False
+
 def startMain():
     pass
-
+    
 if __name__ == '__main__':
     array = numpy.array([[0, 0, 2, 0, 1, 5, 0, 7, 8],
                          [1, 8, 0, 0, 6, 3, 4, 0, 0],

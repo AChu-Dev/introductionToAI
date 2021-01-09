@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
 import solver
 fields = []
 
@@ -27,8 +27,8 @@ def fillGui(array=None):
             num += 1
             x.config(state=DISABLED)
     except:
-        print("An error has occured with the GUI")
-
+        messagebox.showerror("Error", "Error outputting the data")
+        print("Output Gui Error")
 def readGui():
     try:
         for x in fields:
@@ -37,8 +37,11 @@ def readGui():
             inputList.append(x)
         solver.startMain(inputList)
     except:
+        messagebox.showerror("Error", "Error, Reading GUI error")
         print("An Error Occured Reading from GUI")
 
+def infoPrompt(text):
+    prompt = messagebox.showinfo("Information", text)
 
 class GUI:
     def __init__(self, window=None):
