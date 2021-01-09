@@ -10,8 +10,13 @@ def sudokuSolver(array):
                 for value in range(1, 10):
                     if checkValues(array, x, y, value):
                         array[x][y] = value
-                        # backtrack
+                        if sudokuSolver(array):
+                            return True
+                        array[x][y] = 0  
+                return False
     print(array)
+    return True
+    
     return array
 
 
