@@ -49,8 +49,9 @@ class GUI:
         window.title('Sudoku AI')
 
         startButton = ttk.Button(window, text="Start", command=lambda: readGui())
-        startButton.place(x=40, y=570, height=50, width=150)
+        startButton.place(x=143, y=570, height=50, width=143)
         clearButton = ttk.Button(window, text="Clean", command=lambda: clear())
+        clearButton.place(x=286, y=570, height=50, width=143)
 
         for hor in range(9):
             for ver in range(9):
