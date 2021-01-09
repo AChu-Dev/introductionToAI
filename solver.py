@@ -1,11 +1,10 @@
 import numpy
-#import sys
-
+import gui
 
 def sudokuSolver(array):
-    # try:
-    for x in range(len(array)):
-        for y in range(len(array[x])):
+   # try:
+    for x in range(9):
+        for y in range(9):
             if array[x][y] == 0:
                 for value in range(1, 10):
                     if checkValues(array, x, y, value):
@@ -18,7 +17,10 @@ def sudokuSolver(array):
     print("\n")
     flatten = array.flatten()
     mainConstraint(flatten)
+    gui.main(flatten)
     return True
+   # except:
+   #     print("An Error has occured, please check the array")
 
 
 def checkValues(array, x, y, value):
@@ -227,6 +229,8 @@ def mainConstraint(sudoku):
                     print("Grid 8: " + str(grid8) + "\n")
                     print("Grid 9: " + str(grid9) + "\n")
                     return False
+def startMain():
+    pass
 
 if __name__ == '__main__':
     array = numpy.array([[0, 0, 2, 0, 1, 5, 0, 7, 8],
@@ -238,7 +242,7 @@ if __name__ == '__main__':
                          [0, 3, 0, 0, 0, 0, 0, 0, 0],
                          [6, 4, 9, 8, 3, 0, 2, 0, 7],
                          [0, 0, 7, 0, 0, 0, 0, 1, 0]])
-    array = sudokuSolver(array)
+    solvedBool = sudokuSolver(array)
     
 
         

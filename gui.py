@@ -1,28 +1,56 @@
 from tkinter import *
-from tkinter import ttk, filedialog
-import time
+from tkinter import ttk
+import solver
+fields = []
 
-def main():
+def main(array=None):
     root = Tk()
     gui = GUI(root)
+    fillGui(array)
     root.mainloop()
 
-def open_file():
-    filename = filedialog.askopenfile(title="Select a File", filetypes=(
-        ("Text File", "*.txt"), ("Csv File", "*.csv"), ("Excel", "*.xlsx"), ("JSON File", "*.json")))
-
 def clear():
-    pass
+    try:
+        for x in fields:
+            x.config(state=NORMAL)
+            x.delete(0, END)
+    except:
+        print("Cleaning GUI error")
+
+def fillGui(array=None):
+    try:
+        if array is None:
+            return False
+        num = 0
+        for x in fields:
+            x.insert(0, array[num])
+            num += 1
+            x.config(state=DISABLED)
+    except:
+        print("An error has occured with the GUI")
+
+def readGui():
+    try:
+        for x in fields:
+            if not x.get():
+                x = 0
+            inputList.append(x)
+        solver.startMain(inputList)
+    except:
+        print("An Error Occured Reading from GUI")
+
 
 class GUI:
     def __init__(self, window=None):
 
         # Gui window variables
-        window.geometry('572x572')
+        window.geometry('572x632')
         window.resizable(False, False)
         window.title('Sudoku AI')
 
-        fields = []
+        startButton = ttk.Button(window, text="Start", command=lambda: readGui())
+        startButton.place(x=40, y=570, height=50, width=150)
+        clearButton = ttk.Button(window, text="Clean", command=lambda: clear())
 
         for hor in range(9):
             for ver in range(9):
