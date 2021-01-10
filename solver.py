@@ -2,25 +2,25 @@ import numpy
 import gui
 
 def sudokuSolver(array):
-   # try:
-    for x in range(9):
-        for y in range(9):
-            if array[x][y] == 0:
-                for value in range(1, 10):
-                    if checkValues(array, x, y, value):
-                        array[x][y] = value
-                        if sudokuSolver(array):
-                            return True
-                        array[x][y] = 0  
-                return False
-    print(array)
-    print("\n")
-    flatten = array.flatten()
-    mainConstraint(flatten)
-    gui.main(flatten)
-    return True
-   # except:
-   #     print("An Error has occured, please check the array")
+    try:
+    	for x in range(9):
+        	for y in range(9):
+            		if array[x][y] == 0:
+                		for value in range(1, 10):
+                    			if checkValues(array, x, y, value):
+                        			array[x][y] = value
+                        			if sudokuSolver(array):
+                            				return True
+                        			array[x][y] = 0  
+                		return False
+    	print(array)
+    	print("\n")
+    	flatten = array.flatten()
+    	mainConstraint(flatten)
+    	gui.main(flatten)
+    	return True
+    except:
+    	print("An Error has occured, please check the array")
 
 
 def checkValues(array, x, y, value):
